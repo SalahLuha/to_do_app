@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class TextButtonWidgets extends StatelessWidget {
   TextButtonWidgets({super.key, required this.text, this.onTap});
