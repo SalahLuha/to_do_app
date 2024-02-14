@@ -17,10 +17,8 @@ class TextButtonWidgets extends StatelessWidget {
       onPressed: onTap,
       child: Text(
         text,
-        style: GoogleFonts.lato(
-          color: Colors.white.withOpacity(.44),
-          fontSize: 16,
-        ),
+
+        style: Theme.of(context).textTheme.displayMedium!.copyWith(color: Colors.white.withOpacity(.44),),
       ),
     );
   }
