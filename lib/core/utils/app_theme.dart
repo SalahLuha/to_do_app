@@ -36,3 +36,36 @@ ThemeData getAppTheme() {
     ),
   );
 }
+ThemeData getAppDarkTheme() {
+  return ThemeData(
+    primaryColor:  AppColors.red,
+    scaffoldBackgroundColor: AppColors.red,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.background,
+      centerTitle: true,
+    ),
+    //title style
+    textTheme: TextTheme(
+      displayLarge: GoogleFonts.lato(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+        fontSize: 32,
+      ),
+      //sub title style
+      displayMedium: GoogleFonts.lato(
+        color: Colors.white,
+        fontSize: 16,
+      ),
+
+
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4),
+        ),
+      ),
+    ),
+  );
+}
