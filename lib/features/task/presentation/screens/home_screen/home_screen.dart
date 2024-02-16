@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:to_do_app/core/utils/app_assets.dart';
 import 'package:to_do_app/core/utils/app_colors.dart';
 import 'package:to_do_app/core/utils/app_strings.dart';
+import 'package:to_do_app/features/task/presentation/screens/widgets/task_component.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -40,14 +41,15 @@ class HomeScreen extends StatelessWidget {
                 },
               ),
               //no tasks
-              noTasksWidget(context),
+              //Center(child: noTasksWidget(context)),
+              TaskComponent(),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
           backgroundColor: AppColors.primary,
           onPressed: () {},
+          child: const Icon(Icons.add),
         ),
       ),
     );
@@ -57,7 +59,7 @@ class HomeScreen extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(
-          height: 12,
+          height: 50,
         ),
         Image.asset(AppAssets.noTasks),
         Text(
@@ -71,3 +73,5 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
