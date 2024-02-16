@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:to_do_app/core/utils/app_assets.dart';
 import 'package:to_do_app/core/utils/app_colors.dart';
 import 'package:to_do_app/core/utils/app_strings.dart';
+import 'package:to_do_app/features/task/presentation/screens/widgets/elevated_button_widgets.dart';
 import 'package:to_do_app/features/task/presentation/screens/widgets/task_component.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -42,7 +43,53 @@ class HomeScreen extends StatelessWidget {
               ),
               //no tasks
               //Center(child: noTasksWidget(context)),
-              TaskComponent(),
+              InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            padding: const EdgeInsets.all(24),
+                            height: 250,
+                            color: AppColors.deepGrey,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 48,
+                                  width: double.infinity,
+                                  child: ElevatedButtonWidgets(
+                                      text: AppString.taskCompleted,
+                                      onTap: () {}
+                                  ),
+                                ),
+                                const SizedBox(height: 24),
+                                SizedBox(
+                                  height: 48,
+                                  width: double.infinity,
+                                  child: ElevatedButtonWidgets(
+                                      text: AppString.deleteTask,
+                                      onTap: () {},
+                                    backgroundColor: Colors.red,
+
+                                  ),
+                                ),
+                                const SizedBox(height: 24),
+                                SizedBox(
+                                  height: 48,
+                                  width: double.infinity,
+                                  child: ElevatedButtonWidgets(
+                                      text: AppString.cancel,
+                                      onTap: () {
+
+                                      }
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        });
+                  },
+                  child: const TaskComponent()),
             ],
           ),
         ),
@@ -73,5 +120,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-
