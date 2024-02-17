@@ -34,6 +34,38 @@ ThemeData getAppTheme() {
         ),
       ),
     ),
+
+
+    inputDecorationTheme:InputDecorationTheme(
+      fillColor: AppColors.lightBlack,
+      filled: true,
+      hintStyle: GoogleFonts.lato(
+        color: Colors.white,
+        fontSize: 16,
+      ),
+
+
+      enabledBorder:  OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(
+          color: Colors.white,
+        )
+    ),
+
+      focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(
+            color: Colors.white,
+          )
+      ),
+
+      border: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.white,
+          )
+      ),
+    ),
+
   );
 }
 ThemeData getAppDarkTheme() {

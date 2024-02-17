@@ -14,5 +14,6 @@ class AppColors{
   static const Color grey = Color(0xff979797);
   //boton background
   static const Color deepGrey = Color(0xff424242);
+  static const Color lightBlack = Color(0xff1D1D1D);
 
 }

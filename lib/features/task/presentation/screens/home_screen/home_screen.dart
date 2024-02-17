@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:to_do_app/core/utils/app_assets.dart';
 import 'package:to_do_app/core/utils/app_colors.dart';
 import 'package:to_do_app/core/utils/app_strings.dart';
+import 'package:to_do_app/features/task/presentation/screens/add_task_screen/add_task_screen.dart';
 import 'package:to_do_app/features/task/presentation/screens/widgets/elevated_button_widgets.dart';
 import 'package:to_do_app/features/task/presentation/screens/widgets/task_component.dart';
 
@@ -41,7 +42,9 @@ class HomeScreen extends StatelessWidget {
                   // New date selected
                 },
               ),
-              //no tasks
+          const SizedBox(height: 24),
+
+          //no tasks
               //Center(child: noTasksWidget(context)),
               InkWell(
                   onTap: () {
@@ -87,15 +90,25 @@ class HomeScreen extends StatelessWidget {
                               ],
                             ),
                           );
+
                         });
+
                   },
+
                   child: const TaskComponent()),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: AppColors.primary,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) =>  AddTaskScreen(),
+              ),
+            );
+          },
           child: const Icon(Icons.add),
         ),
       ),

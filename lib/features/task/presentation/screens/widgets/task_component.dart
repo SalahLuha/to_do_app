@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_colors.dart';
@@ -35,7 +34,7 @@ class TaskComponent extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Icon(Icons.timer,color: Colors.white),
+                    const Icon(Icons.timer, color: Colors.white),
                     const SizedBox(
                       width: 8,
                     ),
@@ -56,12 +55,9 @@ class TaskComponent extends StatelessWidget {
             ),
           ),
           Container(
-
-
             height: 110,
             width: 2.5,
             color: Colors.white,
-
           ),
           const SizedBox(
             width: 10,
@@ -71,7 +67,8 @@ class TaskComponent extends StatelessWidget {
             child: Text(
               AppString.toDo,
               style: Theme.of(context).textTheme.displayMedium,
-            ),),
+            ),
+          ),
         ],
       ),
     );

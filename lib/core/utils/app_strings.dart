@@ -16,7 +16,7 @@ class AppString {
   static const String today = 'Today';
   static const String noTaskTitle = 'what do you want to do today?';
   static const String noTaskSubTitle = 'Tap + to add your tasks';
-  static const String addTasks = 'Tap + to add your tasks';
+  static const String addTasks = 'Add Tasks';
   static const String title = 'Title';
   static const String titleHint = 'Enter Title here';
   static const String note = 'Note';
