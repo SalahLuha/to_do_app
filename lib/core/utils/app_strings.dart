@@ -22,6 +22,8 @@ class AppString {
   static const String note = 'Note';
   static const String noteHint = 'Enter Note here';
   static const String date = 'Date';
+  static const String colors = 'Colors';
+
   static const String startTime = 'Start Time';
   static const String endTime = 'End Time';
   static const String createTasks = 'Create Tasks';
