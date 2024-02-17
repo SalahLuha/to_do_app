@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomFormTextField extends StatelessWidget {
   CustomFormTextField(
@@ -22,8 +23,8 @@ class CustomFormTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(hider, style: Theme.of(context).textTheme.displayMedium),
-        const SizedBox(
-          height: 8,
+         SizedBox(
+          height: 8.h,
         ),
         TextFormField(
           validator: (data) {

@@ -91,6 +91,7 @@ ThemeData getAppDarkTheme() {
 
 
     ),
+
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,

@@ -6,6 +6,7 @@ import 'package:to_do_app/features/task/presentation/screens/widgets/elevated_bu
 import 'package:to_do_app/features/task/presentation/screens/widgets/text_button_widgets.dart';
 import '../../../../../core/utils/app_strings.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnBoardingScreens extends StatelessWidget {
   OnBoardingScreens({super.key});
@@ -17,117 +18,128 @@ class OnBoardingScreens extends StatelessWidget {
       child: Scaffold(
         body: Padding(
           padding: const EdgeInsets.all(24),
-          child: Column(
-            //crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: PageView.builder(
-                  controller: controller,
-                  itemCount: OnBoardingModel.onBoardingScreens.length,
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        //skip text
-                        index != 2
-                            ? Align(
-                                alignment: Alignment.centerLeft,
-                                child: TextButtonWidgets(
-                                  text: AppString.skip,
-                                  onTap: () {
-                                    controller.jumpToPage(2);
-                                  },
-                                ),
-                              )
-                            : const SizedBox(
-                                height: 30,
-                              ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-
-                        //image
-                        Image.asset(
-                            OnBoardingModel.onBoardingScreens[index].imgPath),
-                        const SizedBox(
-                          height: 16,
-                        ),
-
-                        //dots
-                        SmoothPageIndicator(
-                          controller: controller,
-                          count: 3,
-                          effect: const ExpandingDotsEffect(
-                            activeDotColor: AppColors.primary,
-                            dotHeight: 10,
-                            spacing: 8,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 52,
-                        ),
-
-                        //title
-                        Text(
-                          OnBoardingModel.onBoardingScreens[index].title,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.displayLarge,
-                        ),
-                        //sub title
-                        Text(
-                          OnBoardingModel.onBoardingScreens[index].subTitle,
-                          style: Theme.of(context).textTheme.displayMedium,
-                        ),
-                        const SizedBox(
-                          height: 100,
-                        ),
-                        //buttons
-                        Row(
+          child: PageView.builder(
+            itemBuilder: (context, index) {
+              return Column(
+                //crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: PageView.builder(
+                      controller: controller,
+                      itemCount: OnBoardingModel.onBoardingScreens.length,
+                      itemBuilder: (context, index) {
+                        return Column(
                           children: [
-                            //back button
-                            index != 0
-                                ? TextButtonWidgets(
-                                    text: AppString.back,
-                                    onTap: () {
-                                      controller.previousPage(
-                                          duration: const Duration(
-                                              milliseconds: 1000),
-                                          curve: Curves.fastLinearToSlowEaseIn);
-                                    },
-                                  )
-                                : Container(),
-                            const Spacer(),
-                            //next button
+                            //skip text
                             index != 2
-                                ? ElevatedButtonWidgets(
-                                    text: AppString.next,
-                                    onTap: () {
-                                      controller.nextPage(
-                                          duration: const Duration(
-                                              milliseconds: 1000),
-                                          curve: Curves.fastLinearToSlowEaseIn);
-                                    },
+                                ? Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: TextButtonWidgets(
+                                      text: AppString.skip,
+                                      onTap: () {
+                                        controller.jumpToPage(2);
+                                      },
+                                    ),
                                   )
-                                : ElevatedButtonWidgets(
-                                    //Navigator to home Screen
-                                    text: AppString.getStarted,
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (_) => const HomeScreen(),
-                                        ),
-                                      );
-                                    },
+                                : SizedBox(
+                                    height: 50.h,
                                   ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+
+                            //image
+                            Image.asset(
+                               height: 280.h,
+                                width: 280.w,
+                                OnBoardingModel
+                                    .onBoardingScreens[index].imgPath),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+
+                            //dots
+                            SmoothPageIndicator(
+                              controller: controller,
+                              count: 3,
+                              effect: const ExpandingDotsEffect(
+                                activeDotColor: AppColors.primary,
+                                dotHeight: 10,
+                                spacing: 8,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 52.h,
+                            ),
+
+                            //title
+                            Text(
+                              OnBoardingModel.onBoardingScreens[index].title,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.displayLarge,
+                            ),
+                            //sub title
+                            Text(
+                              OnBoardingModel.onBoardingScreens[index].subTitle,
+                              style: Theme.of(context).textTheme.displayMedium,
+                            ),
+                            SizedBox(
+                              height: 90.h,
+                            ),
+                            //buttons
+                            Row(
+                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                //back button
+                                index != 0
+                                    ? TextButtonWidgets(
+                                        text: AppString.back,
+                                        onTap: () {
+                                          controller.previousPage(
+                                              duration: const Duration(
+                                                  milliseconds: 1000),
+                                              curve: Curves
+                                                  .fastLinearToSlowEaseIn);
+                                        },
+                                      )
+                                    : Container(),
+                                const Spacer(),
+                                //next button
+                                index != 2
+                                    ? ElevatedButtonWidgets(
+                                        text: AppString.next,
+                                        onTap: () {
+                                          controller.nextPage(
+                                              duration: const Duration(
+                                                  milliseconds: 1000),
+                                              curve: Curves
+                                                  .fastLinearToSlowEaseIn);
+                                        },
+                                      )
+                                    : ElevatedButtonWidgets(
+                                        //Navigator to home Screen
+                                        text: AppString.getStarted,
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (_) =>
+                                                  const HomeScreen(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                              ],
+                            )
                           ],
-                        )
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ],
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),

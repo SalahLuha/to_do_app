@@ -1,5 +1,6 @@
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_app/core/utils/app_assets.dart';
 import 'package:to_do_app/core/utils/app_colors.dart';
@@ -20,17 +21,23 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(DateFormat.yMMMMd().format(DateTime.now()),
-                  style: Theme.of(context).textTheme.displayLarge),
-              const SizedBox(
-                height: 12,
+              Row(
+                children: [
+                  Text(DateFormat.yMMMMd().format(DateTime.now()),
+                      style: Theme.of(context).textTheme.displayLarge),
+                ],
+              ),
+
+               SizedBox(
+                height: 12.h,
               ),
               Text(AppString.today,
                   style: Theme.of(context).textTheme.displayLarge),
-              const SizedBox(
-                height: 12,
+              SizedBox(
+                height: 8.h,
               ),
               DatePicker(
+                //Size.fromHeight(10,),
                 DateTime.now(),
                 initialSelectedDate: DateTime.now(),
                 selectionColor: AppColors.primary,
@@ -53,21 +60,21 @@ class HomeScreen extends StatelessWidget {
                         builder: (context) {
                           return Container(
                             padding: const EdgeInsets.all(24),
-                            height: 250,
+                            height: 200.h,
                             color: AppColors.deepGrey,
                             child: Column(
                               children: [
                                 SizedBox(
-                                  height: 48,
+                                  height: 48.h,
                                   width: double.infinity,
                                   child: ElevatedButtonWidgets(
                                       text: AppString.taskCompleted,
                                       onTap: () {}
                                   ),
                                 ),
-                                const SizedBox(height: 24),
+                                 SizedBox(height: 24.h),
                                 SizedBox(
-                                  height: 48,
+                                  height: 48.h,
                                   width: double.infinity,
                                   child: ElevatedButtonWidgets(
                                       text: AppString.deleteTask,
@@ -76,9 +83,9 @@ class HomeScreen extends StatelessWidget {
 
                                   ),
                                 ),
-                                const SizedBox(height: 24),
+                                 SizedBox(height: 24.h),
                                 SizedBox(
-                                  height: 48,
+                                  height: 48.h,
                                   width: double.infinity,
                                   child: ElevatedButtonWidgets(
                                       text: AppString.cancel,
@@ -105,11 +112,11 @@ class HomeScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) =>  AddTaskScreen(),
+                builder: (_) =>  const AddTaskScreen(),
               ),
             );
           },
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.add,color: AppColors.white),
         ),
       ),
     );
@@ -118,8 +125,8 @@ class HomeScreen extends StatelessWidget {
   Column noTasksWidget(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(
-          height: 50,
+         SizedBox(
+          height: 50.h,
         ),
         Image.asset(AppAssets.noTasks),
         Text(
