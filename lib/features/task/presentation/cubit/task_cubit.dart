@@ -3,11 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:to_do_app/features/task/presentation/cubit/task_state.dart';
 
+import '../../../../core/database/cache/cache_helper.dart';
+import '../../../../core/database/sqflite_helper/sqflite_helper.dart';
+import '../../../../core/services/service_locator.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../data/model/task_model.dart';
 
 class TaskCubit extends Cubit<TaskState> {
   TaskCubit() : super(TaskInitial());
   DateTime currentDate = DateTime.now();
+  DateTime selctedDate = DateTime.now();
+
   String startTime = DateFormat('hh:mm a').format(DateTime.now());
   String endTime = DateFormat('hh:mm a').format(
     DateTime.now().add(
@@ -15,6 +21,11 @@ class TaskCubit extends Cubit<TaskState> {
     ),
   );
   int currentIndex = 0;
+  TextEditingController titleController = TextEditingController();
+
+  TextEditingController noteController = TextEditingController();
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   void getDate(context) async {
     emit(GetDateLoadingState());
@@ -35,7 +46,6 @@ class TaskCubit extends Cubit<TaskState> {
     }
   }
 
-
   //getStartTime
   void getStartTime(context) async {
     emit(GetStartTimeLoadingState());
@@ -54,6 +64,7 @@ class TaskCubit extends Cubit<TaskState> {
       print('pickedStartTime == null');
     }
   }
+
   void getEndTime(context) async {
     emit(GetEndTimeLoadingState());
 
@@ -71,6 +82,7 @@ class TaskCubit extends Cubit<TaskState> {
       print('pickedStartTime == null');
     }
   }
+
   Color getColor(index) {
     switch (index) {
       case 0:
@@ -89,9 +101,110 @@ class TaskCubit extends Cubit<TaskState> {
         return AppColors.grey;
     }
   }
+
   void changeCheckMarkIndex(index) {
     currentIndex = index;
     emit(ChangeCheckMarkIndexState());
   }
 
+  void getSelectedDate(date) {
+    emit(GetSelectedDateLoadingState());
+    selctedDate = date;
+
+    emit(GetSelectedDateSucessState());
+    getTasks();
+  }
+
+  List<TaskModel> tasksList = [];
+  void insertTask() async {
+    emit(InsertTaskLoadingState());
+
+    try {
+      await sl<SqfliteHelper>().insertToDB(
+        TaskModel(
+          date: DateFormat.yMd().format(currentDate),
+          title: titleController.text,
+          note: noteController.text,
+          startTime: startTime,
+          endTime: endTime,
+          isCompleted: 0,
+          color: currentIndex,
+        ),
+      );
+      //! to make screen wait 1 second
+      //  await  Future.delayed(const Duration(seconds: 3));
+      //   tasksList.add(TaskModel(
+      //     id: '1',
+      //     date: DateFormat.yMd().format(currentDate),
+      //     title: titleController.text,
+      //     note: noteController.text,
+      //     startTime: startTime,
+      //     endTime: endTime,
+      //     isCompleted: false,
+      //     color: currentIndex,
+      //   ));
+      titleController.clear();
+      noteController.clear();
+      emit(InsertTaskSucessState());
+      getTasks();
+    } catch (e) {
+      emit(InsertTaskErrorState());
+    }
+  }
+
+//!get Tasks
+  void getTasks() async {
+    emit(GetDateLoadingState());
+    await sl<SqfliteHelper>().getFromDB().then((value) {
+      tasksList = value
+          .map((e) => TaskModel.fromJson(e))
+          .toList()
+          .where(
+            (element) => element.date == DateFormat.yMd().format(selctedDate),
+          )
+          .toList();
+      emit(GetDateSucessState());
+    }).catchError((e) {
+      print(e.toString());
+      emit(GetDateErrorState());
+    });
+  }
+
+  //update Task
+  void updateTask(id) async {
+    emit(UpdateTaskLoadingState());
+
+    await sl<SqfliteHelper>().updatedDB(id).then((value) {
+      emit(UpdateTaskSucessState());
+      getTasks();
+    }).catchError((e) {
+      print(e.toString());
+      emit(UpdateTaskErrorState());
+    });
+  }
+
+//delete task
+  void deleteTask(id) async {
+    emit(DeleteTaskLoadingState());
+
+    await sl<SqfliteHelper>().deleteFromDB(id).then((value) {
+      emit(DeleteTaskSucessState());
+      getTasks();
+    }).catchError((e) {
+      print(e.toString());
+      emit(DeleteTaskErrorState());
+    });
+  }
+
+  bool isDark = false;
+  void changeTheme() async {
+    isDark = !isDark;
+    await sl<CacheHelper>().saveData(key: 'isDark', value: isDark);
+    emit(ChangeThemeState());
+  }
+
+  void getTheme() async {
+    isDark = await sl<CacheHelper>().getData(key: 'isDark');
+    emit(GetThemeState());
+  }
 }

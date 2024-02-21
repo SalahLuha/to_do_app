@@ -36,4 +36,5 @@ class AppString {
   static const String noteErrorMsg  = 'Enter Valid Note';
   static const String tilteErrorMsg  = 'Enter Valid title';
 
+  static const String createTask = 'Create task';
 }

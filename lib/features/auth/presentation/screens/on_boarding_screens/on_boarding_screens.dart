@@ -14,6 +14,7 @@ class OnBoardingScreens extends StatelessWidget {
   PageController controller = PageController();
   @override
   Widget build(BuildContext context) {
+   var height = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -51,8 +52,8 @@ class OnBoardingScreens extends StatelessWidget {
 
                             //image
                             Image.asset(
-                               height: 280.h,
-                                width: 280.w,
+                               height: height * .3,
+                               // width: 280.w,
                                 OnBoardingModel
                                     .onBoardingScreens[index].imgPath),
                             SizedBox(
@@ -85,7 +86,7 @@ class OnBoardingScreens extends StatelessWidget {
                               style: Theme.of(context).textTheme.displayMedium,
                             ),
                             SizedBox(
-                              height: 90.h,
+                              height:height *.17,
                             ),
                             //buttons
                             Row(

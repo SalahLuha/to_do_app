@@ -9,12 +9,13 @@ class CustomFormTextField extends StatelessWidget {
       required this.hider,
         this.sufficIcon,
         this.readOnly=false,
-
+        this.validator,
       });
   final String hider;
   String? hintText;
   IconButton? sufficIcon;
    final bool readOnly ;
+   Function (String)? validator ;
 
   TextEditingController? Controller;
   @override
@@ -27,12 +28,8 @@ class CustomFormTextField extends StatelessWidget {
           height: 8.h,
         ),
         TextFormField(
-          validator: (data) {
-            if (data!.isEmpty) {
-              return 'f is required';
-            }
-          },
           readOnly:  readOnly,
+          //validator: validator,
           controller: Controller,
           decoration: InputDecoration(
             hintText: hintText,
